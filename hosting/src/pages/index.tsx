@@ -1,22 +1,39 @@
 'use client'; // this is a client component 👈🏽
 import axios from 'axios';
-import { firestore } from '../db';
+import { firestore } from '@/db';
 import { collection, doc, onSnapshot, setDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
+import PostImageComponent from './components/imagine' // Import the new component
 
-const AUTH_TOKEN = '';
+const AUTH_TOKEN = '8e037a0a-d9c8-4ad0-9b81-1c099ca18ff3';
 const endpoint = `https://api.thenextleg.io`;
 
+interface IMGS {
+  createdAt: any;
+  content: string;
+  messageId: string;
+  imgUrl: string;
+}
+
+/*
+interface ACC {
+  createdAt: any;
+  content: string;
+  messageId: string;
+  imgUrl: string;
+}
+*/
+
 export default function Home() {
-  const [text, setText] = useState('');
-  const [imgs, setImgs] = useState<{ createdAt: any; imgUrl: string }[]>([]);
-  const [loading, setLoading] = useState(false);
+  //const [text, setText] = useState('');
+  const [imgs, setImgs] = useState<IMGS[]>([]);
+  //const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [response, setResponse] = useState('');
 
   useEffect(() => {
     onSnapshot(collection(firestore, 'imgs'), snapshot => {
-      let allImgs: { createdAt: any; imgUrl: string }[] = snapshot.docs.map(
+      let allImgs: IMGS[] = snapshot.docs.map(
         doc => doc.data(),
       ) as any;
       setImgs(allImgs);
@@ -35,46 +52,10 @@ export default function Home() {
             Prompt
           </label>
           <div className='mt-2 flex space-x-2'>
-            <input
-              value={text}
-              onChange={e => setText(e.target.value)}
-              className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
-              placeholder='Enter your prompt here'
-            />
-            <button
-              className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
-              onClick={async () => {
-                console.log(`Submitting my prompt: ${text}`);
-                setLoading(true);
-                try {
-                  let headers = {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${AUTH_TOKEN}`,
-                  };
-
-                  let r = await axios.post(
-                    `${endpoint}`,
-                    {
-                      cmd: 'imagine',
-                      msg: text,
-                    },
-                    { headers },
-                  );
-
-                  console.log(r.data);
-                  setResponse(JSON.stringify(r.data, null, 2));
-                } catch (e: any) {
-                  console.log(e);
-                  setError(e.message);
-                }
-                setLoading(false);
-              }}
-            >
-              {loading ? 'Submitting...' : 'Submit'}
-            </button>
+            <PostImageComponent/>
+            {/*<pre>Response Message: {response}</pre>
+           //Error: {error}*/}
           </div>
-          <pre>Response Message: {response}</pre>
-          Error: {error}
         </div>
       </div>
       <div>
