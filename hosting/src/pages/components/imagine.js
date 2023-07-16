@@ -33,7 +33,7 @@ const PostImageComponent = () => {
             console.error(error);
         }
         setLoading(false);
-
+        console.log(gotMessageID);
     };
 
     return (
