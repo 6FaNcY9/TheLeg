@@ -28,12 +28,14 @@ const PostImageComponent = () => {
             const response = await axios.request(config);
             console.log(JSON.stringify(response.data));
             setResponse(response.data);
-            setMessageId(response.data.messageId)
+            console.log(JSON.stringify(response.data.messageId));
+            setMessageId(response.data.messageId);
+            //console.log(gotMessageID);
+
         } catch (error) {
             console.error(error);
         }
         setLoading(false);
-        console.log(gotMessageID);
     };
 
     return (

@@ -4,7 +4,7 @@ import { addDoc, collection } from 'firebase/firestore';
 
 export default async function handler(req: any, res: any) {
   const { imageUrl, content, messageId, } = req.body as any;
-  console.log(req.body);
+  //console.log(req.body);
 
   await addDoc(collection(firestore, 'imgs'), {
     imgUrl: imageUrl,
