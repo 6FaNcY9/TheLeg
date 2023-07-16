@@ -26,7 +26,7 @@ const PostImageComponent = () => {
 
         try {
             const response = await axios.request(config);
-            console.log(response.data);
+            console.log(JSON.stringify(response.data));
             setResponse(response.data);
             setMessageId(response.data.messageId)
         } catch (error) {

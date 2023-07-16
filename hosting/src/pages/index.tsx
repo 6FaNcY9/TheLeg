@@ -15,62 +15,48 @@ interface IMGS {
   imgUrl: string;
 }
 
-/*
-interface ACC {
-  createdAt: any;
-  content: string;
-  messageId: string;
-  imgUrl: string;
-}
-*/
-
 export default function Home() {
-  //const [text, setText] = useState('');
   const [imgs, setImgs] = useState<IMGS[]>([]);
-  //const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [response, setResponse] = useState('');
 
   useEffect(() => {
     onSnapshot(collection(firestore, 'imgs'), snapshot => {
       let allImgs: IMGS[] = snapshot.docs.map(
-        doc => doc.data(),
+          doc => doc.data(),
       ) as any;
       setImgs(allImgs);
     });
   }, []);
 
   return (
-    <div className='container mx-auto h-screen flex flex-col items-center justify-center '>
-      <div className='w-full mx-auto px-20'>
+      <div className='container mx-auto h-screen flex flex-col items-center justify-center '>
+        <div className='w-full mx-auto px-20'>
+          <div>
+            <label
+                htmlFor='email'
+                className='block text-sm font-medium leading-6 text-gray-900'
+            >
+              Prompt
+            </label>
+            <div className='mt-2 flex space-x-2'>
+              <PostImageComponent/>
+            </div>
+          </div>
+        </div>
         <div>
-          {/* tailwindui.com */}
-          <label
-            htmlFor='email'
-            className='block text-sm font-medium leading-6 text-gray-900'
-          >
-            Prompt
-          </label>
-          <div className='mt-2 flex space-x-2'>
-            <PostImageComponent/>
-            {/*<pre>Response Message: {response}</pre>
-           //Error: {error}*/}
+          <h1 className='text-4xl py-8'>These are your images!</h1>
+          <div className='grid grid-cols-3 gap-4'>
+            {imgs.map(img => (
+                <img
+                    src={img.imgUrl}
+                    className='w-full'
+                    key={img.imgUrl}
+                    alt='nothing'
+                />
+            ))}
           </div>
         </div>
       </div>
-      <div>
-        <h1 className='text-4xl py-8'>These are your images!</h1>
-        <div className='grid grid-cols-3 gap-4'>
-          {imgs.map(img => (
-            <img
-              src={img.imgUrl}
-              className='w-full'
-              key={img.imgUrl}
-              alt='nothing'
-            />
-          ))}
-        </div>
-      </div>
-    </div>
   );
 }
