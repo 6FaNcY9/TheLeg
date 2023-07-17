@@ -1,16 +1,20 @@
 // Webhook response received from The Next Leg
-import { firestore } from '@/db';
-import { addDoc, collection } from 'firebase/firestore';
+import {firestore} from '@/db';
+import {addDoc, collection} from 'firebase/firestore';
 
 export default async function handler(req: any, res: any) {
-  const { imageUrl, content, originatingMessageId, buttonMessageId} = req.body as any;
+  const { imageUrl, imageUrls, content, buttons, type, originatingMessageId, buttonMessageId, responseAt} = req.body as any;
   console.log(req.body);
 
   await addDoc(collection(firestore, 'imgs'), {
-    imgUrl: imageUrl,
     content: content,
-    orMId: originatingMessageId,
+    imgUrl: imageUrl,
+    imgUrls: imageUrls,
+    buttons: buttons,
     createdAt: new Date(),
+    responseAt: responseAt,
+    type: type,
+    orMId: originatingMessageId,
     buttonMessageId: buttonMessageId
   });
 

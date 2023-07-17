@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { useState } from 'react';
+import {useState} from 'react';
 
 const PostImageComponent = () => {
     const [response, setResponse] = useState(null);
     const [loading, setLoading] = useState(false);
     const [text, setText] = useState('');
-    const [gotMessageID, setMessageId] = useState('');
+    //const [gotMessageID, setMessageId] = useState('');
 
     const postImage = async () => {
         setLoading(true);
@@ -29,12 +29,10 @@ const PostImageComponent = () => {
             console.log(JSON.stringify(response.data));
             setResponse(response.data);
             console.log(JSON.stringify(response.data.messageId));
-            setMessageId(response.data.messageId)
         } catch (error) {
             console.error(error);
         }
         setLoading(false);
-        console.log(gotMessageID);
     };
 
     return (

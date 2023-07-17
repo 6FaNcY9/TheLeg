@@ -1,17 +1,13 @@
 'use client'; // this is a client component 👈🏽
 //import axios from 'axios';
-import { firestore } from '@/db';
-import { collection, doc, onSnapshot, setDoc } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
+import {firestore} from '@/db';
+import {collection, onSnapshot} from 'firebase/firestore';
+import {useEffect, useState} from 'react';
 import PostImageComponent from './components/imagine';
-import gotMessageId from './components/imagine';
-import GetMessageInfo from "@/pages/components/message";
-import message from "@/pages/components/message";
-import gotMessageID from "@/pages/components/imagine";
 //import {log} from "util"; // Import the new component
 
-const AUTH_TOKEN = '8e037a0a-d9c8-4ad0-9b81-1c099ca18ff3';
-const endpoint = `https://api.thenextleg.io`;
+//const AUTH_TOKEN = '8e037a0a-d9c8-4ad0-9b81-1c099ca18ff3';
+//const endpoint = `https://api.thenextleg.io`;
 
 interface IMGS {
   createdAt: any;
@@ -22,10 +18,8 @@ interface IMGS {
 
 export default function Home() {
   const [imgs, setImgs] = useState<IMGS[]>([]);
-  const [error, setError] = useState('');
-  const [response, setResponse] = useState('');
-  const [gotMessageId, setMessageId] = useState(''); // Add this line to create a state for messageId
-  const [messageInfo, setMessageInfo] = useState();
+  //const [error, setError] = useState('');
+  //const [response, setResponse] = useState('');
 
   useEffect(() => {
     onSnapshot(collection(firestore, 'imgs'), snapshot => {
