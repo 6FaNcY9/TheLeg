@@ -30,7 +30,7 @@ const PostImageComponent = () => {
             setResponse(response.data);
             console.log(JSON.stringify(response.data.messageId));
             setMessageId(response.data.messageId);
-            //console.log(gotMessageID);
+            console.log(gotMessageID);
 
         } catch (error) {
             console.error(error);

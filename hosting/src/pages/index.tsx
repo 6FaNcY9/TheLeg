@@ -1,9 +1,10 @@
 'use client'; // this is a client component 👈🏽
-import axios from 'axios';
+//import axios from 'axios';
 import { firestore } from '@/db';
 import { collection, doc, onSnapshot, setDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import PostImageComponent from './components/imagine' // Import the new component
+import PostImageComponent from './components/imagine'
+//import {log} from "util"; // Import the new component
 
 const AUTH_TOKEN = '8e037a0a-d9c8-4ad0-9b81-1c099ca18ff3';
 const endpoint = `https://api.thenextleg.io`;
@@ -19,6 +20,7 @@ export default function Home() {
   const [imgs, setImgs] = useState<IMGS[]>([]);
   const [error, setError] = useState('');
   const [response, setResponse] = useState('');
+  //const [messageId, setMessageId] = useState(''); // Add this line to create a state for messageId
 
   useEffect(() => {
     onSnapshot(collection(firestore, 'imgs'), snapshot => {
@@ -40,7 +42,7 @@ export default function Home() {
               Prompt
             </label>
             <div className='mt-2 flex space-x-2'>
-              <PostImageComponent/>
+              <PostImageComponent/> {/* Pass down the setter as a prop */}
             </div>
           </div>
         </div>
