@@ -9,7 +9,6 @@ export default async function handler(req: any, res: any) {
   await addDoc(collection(firestore, 'imgs'), {
     imgUrl: imageUrl,
     content: content,
-    messageId: messageId,
     orMId: originatingMessageId,
     createdAt: new Date(),
   });
