@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 const endpoint = `https://api.thenextleg.io`;
-import gotMessageID from '../imagine.js';
+import gotMessageID from './imagine';
 
 const GetMessageInfo = ({ messageId }) => {
     const [messageInfo, setMessageInfo] = useState(gotMessageID);

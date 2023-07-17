@@ -3,7 +3,11 @@
 import { firestore } from '@/db';
 import { collection, doc, onSnapshot, setDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import PostImageComponent from './components/imagine'
+import PostImageComponent from './components/imagine';
+import gotMessageId from './components/imagine';
+import GetMessageInfo from "@/pages/components/message";
+import message from "@/pages/components/message";
+import gotMessageID from "@/pages/components/imagine";
 //import {log} from "util"; // Import the new component
 
 const AUTH_TOKEN = '8e037a0a-d9c8-4ad0-9b81-1c099ca18ff3';
@@ -20,7 +24,8 @@ export default function Home() {
   const [imgs, setImgs] = useState<IMGS[]>([]);
   const [error, setError] = useState('');
   const [response, setResponse] = useState('');
-  //const [messageId, setMessageId] = useState(''); // Add this line to create a state for messageId
+  const [gotMessageId, setMessageId] = useState(''); // Add this line to create a state for messageId
+  const [messageInfo, setMessageInfo] = useState();
 
   useEffect(() => {
     onSnapshot(collection(firestore, 'imgs'), snapshot => {
@@ -42,8 +47,9 @@ export default function Home() {
               Prompt
             </label>
             <div className='mt-2 flex space-x-2'>
-              <PostImageComponent/> {/* Pass down the setter as a prop */}
+              <PostImageComponent setMessageId={setMessageId}/>
             </div>
+              <GetMessageInfo messageId={imgs.at(0)}/>
           </div>
         </div>
         <div>
