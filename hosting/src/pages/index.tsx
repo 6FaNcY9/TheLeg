@@ -47,9 +47,8 @@ export default function Home() {
               Prompt
             </label>
             <div className='mt-2 flex space-x-2'>
-              <PostImageComponent setMessageId={setMessageId}/>
+              <PostImageComponent/>
             </div>
-              <GetMessageInfo messageId={imgs.at(0)}/>
           </div>
         </div>
         <div>
