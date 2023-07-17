@@ -17,7 +17,7 @@ interface IMGS {
   createdAt: any;
   content: string;
   messageId: string;
-  imgUrl: string;
+  imageUrl: string;
 }
 
 export default function Home() {
@@ -56,9 +56,9 @@ export default function Home() {
           <div className='grid grid-cols-3 gap-4'>
             {imgs.map(img => (
                 <img
-                    src={img.imgUrl}
+                    src={img.imageUrl}
                     className='w-full'
-                    key={img.imgUrl}
+                    key={img.imageUrl}
                     alt='nothing'
                 />
             ))}
