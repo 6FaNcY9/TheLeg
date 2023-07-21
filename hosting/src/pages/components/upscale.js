@@ -7,7 +7,10 @@ export const upscaleImage = async (buttonMessageId, button) => {
         method: 'post',
         maxBodyLength: Infinity,
         url: 'https://api.thenextleg.io/v2/button',
-        headers: { },
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer 8e037a0a-d9c8-4ad0-9b81-1c099ca18ff3`
+        },
         data : data
     };
 
