@@ -1,6 +1,8 @@
 import axios from 'axios';
 import {useState} from 'react';
 
+//const AUTH_TOKEN = '8e037a0a-d9c8-4ad0-9b81-1c099ca18ff3';
+
 const PostImageComponent = () => {
     const [response, setResponse] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -19,7 +21,7 @@ const PostImageComponent = () => {
             url: 'https://api.thenextleg.io/v2/imagine',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer 8e037a0a-d9c8-4ad0-9b81-1c099ca18ff3' // replace with your actual token
+                'Authorization': `Bearer 8e037a0a-d9c8-4ad0-9b81-1c099ca18ff3` // replace with your actual token
             },
             data : data
         };

@@ -3,7 +3,7 @@ import {firestore} from '@/db';
 import {addDoc, collection} from 'firebase/firestore';
 
 export default async function handler(req: any, res: any) {
-  const { imageUrl, imageUrls, content, buttons, type, originatingMessageId, buttonMessageId, responseAt} = req.body as any;
+  const { imageUrl, imageUrls, content, buttons, originatingMessageId, buttonMessageId, responseAt} = req.body as any;
   console.log(req.body);
 
   await addDoc(collection(firestore, 'imgs'), {
@@ -13,7 +13,7 @@ export default async function handler(req: any, res: any) {
     buttons: buttons,
     createdAt: new Date(),
     responseAt: responseAt,
-    type: type,
+    //type: type,
     orMId: originatingMessageId,
     buttonMessageId: buttonMessageId
   });
