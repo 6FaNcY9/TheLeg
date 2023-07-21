@@ -1,5 +1,5 @@
-// File: upscaleImage.js
 import axios from 'axios';
+import {useEffect} from 'react';
 
 export const upscaleImage = async (buttonMessageId, button) => {
     const data = `{\r\n    "button": "${button}",\r\n    "buttonMessageId": "${buttonMessageId}"\r\n}`;
@@ -7,9 +7,7 @@ export const upscaleImage = async (buttonMessageId, button) => {
         method: 'post',
         maxBodyLength: Infinity,
         url: 'https://api.thenextleg.io/v2/button',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer 8e037a0a-d9c8-4ad0-9b81-1c099ca18ff3`  },
+        headers: { },
         data : data
     };
 
@@ -20,3 +18,14 @@ export const upscaleImage = async (buttonMessageId, button) => {
         console.error(err.message);
     }
 };
+
+// Dummy component
+const Upscale = () => {
+    useEffect(() => {
+        console.log("Upscale component mounted");
+    }, []);
+
+    return null;
+};
+
+export default Upscale;
