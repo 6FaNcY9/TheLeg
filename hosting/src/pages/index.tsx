@@ -4,8 +4,7 @@ import {firestore} from '@/db';
 import {collection, onSnapshot, orderBy, query} from 'firebase/firestore';
 import {useEffect, useState} from 'react';
 import PostImageComponent from './components/imagine';
-import UpscaleImage from "@/pages/components/upscale";
-import Image from 'next/image'
+import {upscaleImage} from "@/pages/components/upscale";
 //import message from "@/pages/components/message";
 //import {log} from "util"; // Import the new component
 
@@ -78,14 +77,15 @@ export default function Home() {
                 All Images
               </label>
               <div className='grid grid-cols-4 gap-4'>
-                {imgs.filter(img => img.buttons).sort((a,b) => b.createdAt - a.createdAt).map(img => (                    <div key={img.messageId} className='bg-gray-800 shadow-lg rounded-lg overflow-hidden'>
-                      <Image src={img.imgUrl} className='w-full h-64 object-contain' alt='Image'/>
-                      <div className='p-4'>
+                {imgs.filter(img => img.buttons).sort((a,b) => b.createdAt - a.createdAt).map(img => (
+                    <div key={img.messageId} className='bg-gray-800 pt-6 shadow-lg rounded-lg overflow-hidden'>
+                      <img src={img.imgUrl} className='w-full h-64 object-contain' alt='Image'/>
+                      <div className='p-6'>
                         {img.buttons && img.buttons.map((button: string, index: number) => (
                             <button
                                 key={index}
                                 className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
-                                onClick={() => <UpscaleImage buttonMessageId={img.buttonMessageId} button={button} />}
+                                onClick={() => upscaleImage(img.buttonMessageId, button)}
                             >
                               {button}
                             </button>
