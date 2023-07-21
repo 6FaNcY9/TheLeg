@@ -74,10 +74,13 @@ export default function Home() {
 
             <div className='border-b-4 border-gray-800 rounded-sm pb-4 mb-6'>
               <label htmlFor='email' className='block text-lg font-bold mb-2 text-blue-700 uppercase'>
-                All Images
+                All Images Too Day
               </label>
               <div className='grid grid-cols-4 gap-4'>
-                {imgs.filter(img => img.buttons).sort((a,b) => b.createdAt - a.createdAt).map(img => (
+                {imgs
+                    .filter(img => img.buttons && new Date(img.createdAt).setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0))
+                    .sort((a, b) => b.createdAt - a.createdAt)
+                    .map(img => (
                     <div key={img.messageId} className='bg-gray-800 pt-6 shadow-lg rounded-lg overflow-hidden'>
                       <img src={img.imgUrl} className='w-full h-64 object-contain' alt='Image'/>
                       <div className='p-6'>
